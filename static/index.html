@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1528" />
+  <title>BusSync | Transportation Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="BusSync home">
+        <span class="brand-icon">B</span>
+        <span>Bus<span class="brand-blue">Sync</span></span>
+      </a>
+
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-item active" data-page="overview">▦ <span>Overview</span></button>
+        <button class="nav-item" data-page="students">♙ <span>Students</span></button>
+        <button class="nav-item" data-page="buses">▰ <span>Buses</span></button>
+        <button class="nav-item" data-page="routes">⇄ <span>Routes</span></button>
+        <button class="nav-item" data-page="trips">◷ <span>Trips</span></button>
+        <button class="nav-item" data-page="attendance">✓ <span>Attendance</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="connection-indicator">
+          <span id="connection-dot" class="status-dot"></span>
+          <div>
+            <strong id="connection-label">Connecting...</strong>
+            <small>Local API server</small>
+          </div>
+        </div>
+        <p class="sidebar-version">BusSync · Development</p>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SCHOOL TRANSPORTATION</p>
+          <h1 id="page-title">Overview</h1>
+        </div>
+        <button id="refresh-button" class="button button-primary">
+          ↻ <span>Refresh data</span>
+        </button>
+      </header>
+
+      <div class="development-banner">
+        <span>DEVELOPMENT PREVIEW</span>
+        <span>Demo records · No live GPS tracking</span>
+      </div>
+
+      <section id="error-panel" class="error-panel" hidden>
+        <strong>Unable to load BusSync data</strong>
+        <p id="error-message"></p>
+        <p>Check that your FastAPI server is running at
+          <code>http://127.0.0.1:8000</code>.
+        </p>
+      </section>
+
+      <section id="overview-page" class="page">
+        <div class="welcome-row">
+          <div>
+            <h2>Your transportation hub</h2>
+            <p>Here's the current state of your BusSync database.</p>
+          </div>
+          <span class="date-label" id="current-date"></span>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-top"><span>Students</span><span class="stat-icon">♙</span></div>
+            <strong id="student-count" class="stat-number">—</strong>
+            <p>Student records</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Buses</span><span class="stat-icon">▰</span></div>
+            <strong id="bus-count" class="stat-number">—</strong>
+            <p>Bus records</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Routes</span><span class="stat-icon">⇄</span></div>
+            <strong id="route-count" class="stat-number">—</strong>
+            <p>Configured routes</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-top"><span>Trips</span><span class="stat-icon">◷</span></div>
+            <strong id="trip-count" class="stat-number">—</strong>
+            <p>Recorded trips</p>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <div><h2>Bus fleet</h2><p>Registered vehicles</p></div>
+              <button class="text-button" data-go="buses">View all →</button>
+            </div>
+            <div id="fleet-preview" class="preview-list">
+              <p class="muted">Loading buses...</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <div><h2>Recent trips</h2><p>Latest recorded activity</p></div>
+              <button class="text-button" data-go="trips">View all →</button>
+            </div>
+            <div id="trip-preview" class="preview-list">
+              <p class="muted">Loading trips...</p>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel activity-panel">
+          <div class="panel-heading">
+            <div><h2>System status</h2><p>Local development environment</p></div>
+          </div>
+          <div class="system-status">
+            <div class="system-status-icon">✓</div>
+            <div><strong id="status-title">Checking connection</strong>
+              <p id="status-description">Contacting the BusSync API...</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="records-page" class="page" hidden>
+        <section class="panel records-panel">
+          <div class="panel-heading">
+            <div><h2 id="records-title">Records</h2><p id="records-subtitle">Data from your backend</p></div>
+            <span id="record-count" class="count-pill">0 records</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <footer class="footer">
+        <span>BusSync Phase 2</span>
+        <span>Local development prototype</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
