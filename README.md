@@ -120,6 +120,6 @@ These are planned possibilities and may not be implemented in the current versio
 
 No license has been specified yet. All rights are reserved by default unless a license is added to the repository.
 
----
+
 
 **BusSync — Making school transportation more connected, organized, and accessible.**
